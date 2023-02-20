@@ -1,5 +1,5 @@
-I, [2023-02-20T10:17:00.935312 #7946]  INFO -- : Registered expected interaction GET /users/1
-D, [2023-02-20T10:17:00.935683 #7946] DEBUG -- : {
+I, [2023-02-20T15:44:38.855480 #9695]  INFO -- : Registered expected interaction GET /users/1
+D, [2023-02-20T15:44:38.855852 #9695] DEBUG -- : {
   "description": "User 'Alice' is requested",
   "providerState": "User Alice exists",
   "request": {
@@ -31,20 +31,20 @@ D, [2023-02-20T10:17:00.935683 #7946] DEBUG -- : {
   },
   "metadata": null
 }
-I, [2023-02-20T10:17:00.936747 #7946]  INFO -- : Received request GET /users/1
-D, [2023-02-20T10:17:00.936931 #7946] DEBUG -- : {
+I, [2023-02-20T15:44:38.856602 #9695]  INFO -- : Received request GET /users/1
+D, [2023-02-20T15:44:38.856786 #9695] DEBUG -- : {
   "path": "/users/1",
   "query": "",
   "method": "get",
   "headers": {
-    "Host": "localhost:41357",
+    "Host": "localhost:42553",
     "User-Agent": "Go-http-client/1.1",
     "Accept-Encoding": "gzip",
     "Version": "HTTP/1.1"
   }
 }
-I, [2023-02-20T10:17:00.937116 #7946]  INFO -- : Found matching response for GET /users/1
-D, [2023-02-20T10:17:00.937222 #7946] DEBUG -- : {
+I, [2023-02-20T15:44:38.857007 #9695]  INFO -- : Found matching response for GET /users/1
+D, [2023-02-20T15:44:38.857143 #9695] DEBUG -- : {
   "status": 200,
   "headers": {
   },
@@ -57,6 +57,6 @@ D, [2023-02-20T10:17:00.937222 #7946] DEBUG -- : {
     }
   }
 }
-I, [2023-02-20T10:17:00.937878 #7946]  INFO -- : Verifying - interactions matched
-I, [2023-02-20T10:17:00.938444 #7946]  INFO -- : Cleared interactions
-I, [2023-02-20T10:17:00.939438 #7946]  INFO -- : Writing pact for example-server to /mnt/c/Users/den/api-server/transPact/pkg/client/pacts/example-client-example-server.json
+I, [2023-02-20T15:44:38.857706 #9695]  INFO -- : Verifying - interactions matched
+I, [2023-02-20T15:44:38.858301 #9695]  INFO -- : Cleared interactions
+I, [2023-02-20T15:44:38.859306 #9695]  INFO -- : Writing pact for provaider_ebanii to /mnt/c/Users/den/api-server/transPact/pkg/client/pacts/klient_ebanii-provaider_ebanii.json

@@ -65,3 +65,45 @@ I, [2023-02-20T10:19:24.341468 #9377]  INFO -- : Sending GET request to path: "/
 D, [2023-02-20T10:19:24.341777 #9377] DEBUG -- : body :
 I, [2023-02-20T10:19:24.349259 #9377]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"62", "Content-Type"=>"application/json; charset=utf-8", "Date"=>"Mon, 20 Feb 2023 09:19:24 GMT"}, see debug logs for body
 D, [2023-02-20T10:19:24.349521 #9377] DEBUG -- : body: {"id":"19999","firstName":"first19999","lastName":"last19999"}
+I, [2023-02-20T15:10:32.525144 #4364]  INFO -- : Running example 'Verifying a pact between klient_ebanii and provaider_ebanii Given User Alice exists User 'Alice' is requested with GET /users/1 returns a response which has status code 200'
+I, [2023-02-20T15:10:32.525512 #4364]  INFO -- : Sending GET request to path: "/users/1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User Alice exists"}]}, see debug logs for body
+D, [2023-02-20T15:10:32.525687 #4364] DEBUG -- : body :
+I, [2023-02-20T15:10:32.532696 #4364]  INFO -- : Received response with status: 502, headers: {"Date"=>"Mon, 20 Feb 2023 14:10:32 GMT", "Content-Length"=>"0"}, see debug logs for body
+D, [2023-02-20T15:10:32.532836 #4364] DEBUG -- : body: 
+W, [2023-02-20T15:10:32.534686 #4364]  WARN -- : No content type found, performing text diff on body
+I, [2023-02-20T15:21:40.293636 #5596]  INFO -- : Running example 'Verifying a pact between klient_ebanii and provaider_ebanii Given User Alice exists User 'Alice' is requested with GET /users/1 returns a response which has status code 200'
+I, [2023-02-20T15:21:40.295245 #5596]  INFO -- : Sending GET request to path: "/users/1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User Alice exists"}]}, see debug logs for body
+D, [2023-02-20T15:21:40.295478 #5596] DEBUG -- : body :
+I, [2023-02-20T15:21:40.304397 #5596]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"50", "Content-Type"=>"application/json; charset=utf-8", "Date"=>"Mon, 20 Feb 2023 14:21:40 GMT"}, see debug logs for body
+D, [2023-02-20T15:21:40.304645 #5596] DEBUG -- : body: {"id":"1","firstName":"first1","lastName":"last1"}
+I, [2023-02-20T15:22:42.824383 #5844]  INFO -- : Running example 'Verifying a pact between klient_ebanii and provaider_ebanii Given User Alice exists User 'Alice' is requested with GET /users/1 returns a response which has status code 200'
+I, [2023-02-20T15:22:42.826050 #5844]  INFO -- : Sending GET request to path: "/users/1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User Alice exists"}]}, see debug logs for body
+D, [2023-02-20T15:22:42.826202 #5844] DEBUG -- : body :
+I, [2023-02-20T15:22:42.836127 #5844]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"50", "Content-Type"=>"application/json; charset=utf-8", "Date"=>"Mon, 20 Feb 2023 14:22:42 GMT"}, see debug logs for body
+D, [2023-02-20T15:22:42.836424 #5844] DEBUG -- : body: {"id":"1","firstName":"first1","lastName":"last1"}
+I, [2023-02-20T15:25:28.004045 #7040]  INFO -- : Running example 'Verifying a pact between klient_ebanii and provaider_ebanii Given User Alice exists User 'Alice' is requested with GET /users/1 returns a response which has status code 201'
+I, [2023-02-20T15:25:28.004450 #7040]  INFO -- : Sending GET request to path: "/users/1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User Alice exists"}]}, see debug logs for body
+D, [2023-02-20T15:25:28.004559 #7040] DEBUG -- : body :
+I, [2023-02-20T15:25:28.012767 #7040]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"50", "Content-Type"=>"application/json; charset=utf-8", "Date"=>"Mon, 20 Feb 2023 14:25:28 GMT"}, see debug logs for body
+D, [2023-02-20T15:25:28.013059 #7040] DEBUG -- : body: {"id":"1","firstName":"first1","lastName":"last1"}
+I, [2023-02-20T15:45:45.130131 #9910]  INFO -- : Running example 'Verifying a pact between klient_ebanii and provaider_ebanii Given User Alice exists User 'Alice' is requested with GET /users/1 returns a response which has status code 200'
+I, [2023-02-20T15:45:45.131665 #9910]  INFO -- : Sending GET request to path: "/users/1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User Alice exists"}]}, see debug logs for body
+D, [2023-02-20T15:45:45.131840 #9910] DEBUG -- : body :
+I, [2023-02-20T15:45:45.138999 #9910]  INFO -- : Received response with status: 502, headers: {"Date"=>"Mon, 20 Feb 2023 14:45:45 GMT", "Content-Length"=>"0"}, see debug logs for body
+D, [2023-02-20T15:45:45.139236 #9910] DEBUG -- : body: 
+W, [2023-02-20T15:45:45.141227 #9910]  WARN -- : No content type found, performing text diff on body
+I, [2023-02-20T15:45:54.881624 #10256]  INFO -- : Running example 'Verifying a pact between klient_ebanii and provaider_ebanii Given User Alice exists User 'Alice' is requested with GET /users/1 returns a response which has status code 200'
+I, [2023-02-20T15:45:54.882071 #10256]  INFO -- : Sending GET request to path: "/users/1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User Alice exists"}]}, see debug logs for body
+D, [2023-02-20T15:45:54.882298 #10256] DEBUG -- : body :
+I, [2023-02-20T15:45:54.891284 #10256]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"50", "Content-Type"=>"application/json; charset=utf-8", "Date"=>"Mon, 20 Feb 2023 14:45:54 GMT"}, see debug logs for body
+D, [2023-02-20T15:45:54.891597 #10256] DEBUG -- : body: {"id":"1","firstName":"first1","lastName":"last1"}
+I, [2023-02-20T15:46:04.928733 #10466]  INFO -- : Running example 'Verifying a pact between klient_ebanii and provaider_ebanii Given User Alice exists User 'Alice' is requested with GET /users/1 returns a response which has status code 200'
+I, [2023-02-20T15:46:04.929094 #10466]  INFO -- : Sending GET request to path: "/users/1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User Alice exists"}]}, see debug logs for body
+D, [2023-02-20T15:46:04.929220 #10466] DEBUG -- : body :
+I, [2023-02-20T15:46:04.937076 #10466]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"50", "Content-Type"=>"application/json; charset=utf-8", "Date"=>"Mon, 20 Feb 2023 14:46:04 GMT"}, see debug logs for body
+D, [2023-02-20T15:46:04.937286 #10466] DEBUG -- : body: {"id":"1","firstName":"first1","lastName":"last1"}
+I, [2023-02-20T15:46:21.561811 #10686]  INFO -- : Running example 'Verifying a pact between klient_ebanii and provaider_ebanii Given User Alice exists User 'Alice' is requested with GET /users/1 returns a response which has status code 2002'
+I, [2023-02-20T15:46:21.563303 #10686]  INFO -- : Sending GET request to path: "/users/1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User Alice exists"}]}, see debug logs for body
+D, [2023-02-20T15:46:21.563491 #10686] DEBUG -- : body :
+I, [2023-02-20T15:46:21.571909 #10686]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"50", "Content-Type"=>"application/json; charset=utf-8", "Date"=>"Mon, 20 Feb 2023 14:46:21 GMT"}, see debug logs for body
+D, [2023-02-20T15:46:21.572166 #10686] DEBUG -- : body: {"id":"1","firstName":"first1","lastName":"last1"}

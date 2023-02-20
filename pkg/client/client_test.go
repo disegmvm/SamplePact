@@ -11,54 +11,51 @@ import (
 )
 
 func TestClientPact_Local(t *testing.T) {
-	// initialize PACT DSL
+	log.Println("OOOOOOOOOOOOOOOOOOOOOOOO nachalo OOOOOOOOOOOOOOOOOOOO")
+
+	// инициализация PACT DSL
 	pact := dsl.Pact{
-		Consumer:                 "example-client",
-		Provider:                 "example-server",
-		DisableToolValidityCheck: false,
+		Consumer: "klient_ebanii",
+		Provider: "provaider_ebanii",
 	}
 
-	// setup a PACT Mock Server
+	// установка PACT Mock Server
 	pact.Setup(true)
 
 	t.Run("get user by id", func(t *testing.T) {
 		id := "1"
 
-		log.Println("[XXX DEBUG XXX] i'm in test ...")
-
 		pact.
-			AddInteraction().                           // specify PACT interaction
-			Given("User Alice exists").                 // specify Provider state
-			UponReceiving("User 'Alice' is requested"). // specify test case name
-			WithRequest(dsl.Request{                    // specify expected request
+			AddInteraction().                           // задается PACT-взаимодействие
+			Given("User Alice exists").                 // задается состояние Поставщика
+			UponReceiving("User 'Alice' is requested"). // задается название тест-кейса
+			WithRequest(dsl.Request{                    // задается ожидаемый запрос
 				Method: "GET",
-				Path:   dsl.Term("/users/1", "/users/[0-9]+"), // specify matching for endpoint
+				Path:   dsl.Term("/users/1", "/users/[0-9]+"), // задается соответствие для конечной точки
 			}).
-			WillRespondWith(dsl.Response{ // specify minimal expected response
+			WillRespondWith(dsl.Response{ // задается минимальный ожидаемый ответ
 				Status: 200,
-				Body: dsl.Like(server.User{ // pecify matching for response body
+				Body: dsl.Like(server.User{ // задается соответствие для тела ответа
 					ID:        id,
 					FirstName: "Alice",
 					LastName:  "Doe",
 				}),
 			})
 
-		// verify interaction on client side
+		// верификация взаимодействия на стороне клиента
 		err := pact.Verify(func() error {
-			// specify host anf post of PACT Mock Server as actual server
+			// задается хост и публикуется PACT Mock Server в качестве актуального сервера
 			host := fmt.Sprintf("%s:%d", pact.Host, pact.Server.Port)
 
-			// execute function
+			// выполнение функции
 			user, err := GetUserByID(host, id)
 			if err != nil {
 				return errors.New("error is not expected")
 			}
 
-			// check if actual user is equal to expected
+			// проверка, что полученный пользователь соответствует ожидаемому
 			if user == nil || user.ID != id {
 				return fmt.Errorf("expected user with ID %s but got %v", id, user)
-			} else {
-				log.Println("[XXX DEBUG XXX] ONE TEST PASSED ...")
 			}
 
 			return err
@@ -67,15 +64,15 @@ func TestClientPact_Local(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-
-		log.Println("[XXX DEBUG XXX] TESTI PROSHLI &&&??? ...")
 	})
 
-	// write Contract into file
+	// Контракт пишется в файл
 	if err := pact.WritePact(); err != nil {
 		t.Fatal(err)
 	}
 
-	// stop PACT mock server
+	// остановка PACT Mock Server
 	pact.Teardown()
+
+	log.Println("OOOOOOOOOOOOOOOOOOOOOOOO konec OOOOOOOOOOOOOOOOOOOO")
 }

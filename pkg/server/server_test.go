@@ -3,7 +3,6 @@ package server
 import (
 	"github.com/pact-foundation/pact-go/dsl"
 	"log"
-
 	//
 	// some imports
 	//
@@ -13,24 +12,20 @@ import (
 
 func TestServerPact_Verification(t *testing.T) {
 
-	/*router := gin.Default()
-	router.GET("/users/:userId", GetUserByID)
-	router.Run(":8080")*/
-
 	// initialize PACT DSL
 	pact := dsl.Pact{
-		Provider: "example-server",
+		Provider: "Denis testit server ebanii",
 	}
 
 	// verify Contract on server side
-	log.Println("[[[[[[[[[[]]]]]]]]]]]]]] test")
+	log.Println("OOOOOOOOOOOOO nachalo vefity OOOOOOOOOOOOOOOOOOO")
 	_, err := pact.VerifyProvider(t, types.VerifyRequest{
 		ProviderBaseURL: "http://127.0.0.1:8080",
-		PactURLs:        []string{"../client/pactx/example-client-example-server.json"},
+		PactURLs:        []string{"../client/pacts/klient_ebanii-provaider_ebanii.json"},
 	})
 
 	if err != nil {
 		t.Log(err)
 	}
-	log.Println("[[[[[[[[[[]]]]]]]]]]]]]] test PASS")
+	log.Println("OOOOOOOOOOOOOOOOOOOOO konec verify (pass???????????) OOOOOOOOOOOOOOOOO")
 }
