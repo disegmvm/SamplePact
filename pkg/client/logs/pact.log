@@ -1,0 +1,62 @@
+I, [2023-02-20T10:17:00.935312 #7946]  INFO -- : Registered expected interaction GET /users/1
+D, [2023-02-20T10:17:00.935683 #7946] DEBUG -- : {
+  "description": "User 'Alice' is requested",
+  "providerState": "User Alice exists",
+  "request": {
+    "method": "GET",
+    "path": {
+      "json_class": "Pact::Term",
+      "data": {
+        "generate": "/users/1",
+        "matcher": {
+          "json_class": "Regexp",
+          "o": 0,
+          "s": "/users/[0-9]+"
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+    },
+    "body": {
+      "json_class": "Pact::SomethingLike",
+      "contents": {
+        "id": "1",
+        "firstName": "Alice",
+        "lastName": "Doe"
+      }
+    }
+  },
+  "metadata": null
+}
+I, [2023-02-20T10:17:00.936747 #7946]  INFO -- : Received request GET /users/1
+D, [2023-02-20T10:17:00.936931 #7946] DEBUG -- : {
+  "path": "/users/1",
+  "query": "",
+  "method": "get",
+  "headers": {
+    "Host": "localhost:41357",
+    "User-Agent": "Go-http-client/1.1",
+    "Accept-Encoding": "gzip",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2023-02-20T10:17:00.937116 #7946]  INFO -- : Found matching response for GET /users/1
+D, [2023-02-20T10:17:00.937222 #7946] DEBUG -- : {
+  "status": 200,
+  "headers": {
+  },
+  "body": {
+    "json_class": "Pact::SomethingLike",
+    "contents": {
+      "id": "1",
+      "firstName": "Alice",
+      "lastName": "Doe"
+    }
+  }
+}
+I, [2023-02-20T10:17:00.937878 #7946]  INFO -- : Verifying - interactions matched
+I, [2023-02-20T10:17:00.938444 #7946]  INFO -- : Cleared interactions
+I, [2023-02-20T10:17:00.939438 #7946]  INFO -- : Writing pact for example-server to /mnt/c/Users/den/api-server/transPact/pkg/client/pacts/example-client-example-server.json
