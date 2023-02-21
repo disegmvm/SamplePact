@@ -12,20 +12,35 @@ import (
 
 func TestServerPact_Verification(t *testing.T) {
 
-	// initialize PACT DSL
+	log.Println("[debug] test start")
+
 	pact := dsl.Pact{
-		Provider: "Denis testit server ebanii",
+		Consumer: "Client",
+		Provider: "Provider",
 	}
 
-	// verify Contract on server side
-	log.Println("OOOOOOOOOOOOO nachalo vefity OOOOOOOOOOOOOOOOOOO")
+	log.Println("[debug] start verification")
+	_, err := pact.VerifyProvider(t, types.VerifyRequest{
+		ProviderBaseURL:            "http://127.0.0.1:8080",
+		BrokerURL:                  "https://pen.pactflow.io",
+		BrokerToken:                "jEQnxw7xWgYRv-3-G7Cx-g",
+		PublishVerificationResults: true,
+		ProviderVersion:            "1.0.0",
+	})
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Uncomment to verify contract locally
+	/*log.Println("[debug] start verification")
 	_, err := pact.VerifyProvider(t, types.VerifyRequest{
 		ProviderBaseURL: "http://127.0.0.1:8080",
-		PactURLs:        []string{"../client/pacts/klient_ebanii-provaider_ebanii.json"},
-	})
+		PactURLs:        []string{"../client/pactsX/den_client-den_provider.json"},
+	})*/
 
 	if err != nil {
 		t.Log(err)
 	}
-	log.Println("OOOOOOOOOOOOOOOOOOOOO konec verify (pass???????????) OOOOOOOOOOOOOOOOO")
+	log.Println("[debug] passed with no errors")
 }

@@ -1,13 +1,13 @@
-I, [2023-02-20T15:44:38.855480 #9695]  INFO -- : Registered expected interaction GET /users/1
-D, [2023-02-20T15:44:38.855852 #9695] DEBUG -- : {
-  "description": "User 'Alice' is requested",
-  "providerState": "User Alice exists",
+I, [2023-02-21T16:23:49.556594 #27559]  INFO -- : Registered expected interaction GET /users/100
+D, [2023-02-21T16:23:49.557129 #27559] DEBUG -- : {
+  "description": "User 'River Island' is requested",
+  "providerState": "User River Island exists",
   "request": {
     "method": "GET",
     "path": {
       "json_class": "Pact::Term",
       "data": {
-        "generate": "/users/1",
+        "generate": "/users/100",
         "matcher": {
           "json_class": "Regexp",
           "o": 0,
@@ -23,40 +23,39 @@ D, [2023-02-20T15:44:38.855852 #9695] DEBUG -- : {
     "body": {
       "json_class": "Pact::SomethingLike",
       "contents": {
-        "id": "1",
-        "firstName": "Alice",
-        "lastName": "Doe"
+        "id": "100",
+        "firstName": "River Island",
+        "lastName": "UK"
       }
     }
   },
   "metadata": null
 }
-I, [2023-02-20T15:44:38.856602 #9695]  INFO -- : Received request GET /users/1
-D, [2023-02-20T15:44:38.856786 #9695] DEBUG -- : {
-  "path": "/users/1",
+I, [2023-02-21T16:23:49.558134 #27559]  INFO -- : Received request GET /users/100
+D, [2023-02-21T16:23:49.558397 #27559] DEBUG -- : {
+  "path": "/users/100",
   "query": "",
   "method": "get",
   "headers": {
-    "Host": "localhost:42553",
+    "Host": "localhost:33373",
     "User-Agent": "Go-http-client/1.1",
     "Accept-Encoding": "gzip",
     "Version": "HTTP/1.1"
   }
 }
-I, [2023-02-20T15:44:38.857007 #9695]  INFO -- : Found matching response for GET /users/1
-D, [2023-02-20T15:44:38.857143 #9695] DEBUG -- : {
+I, [2023-02-21T16:23:49.558684 #27559]  INFO -- : Found matching response for GET /users/100
+D, [2023-02-21T16:23:49.558806 #27559] DEBUG -- : {
   "status": 200,
   "headers": {
   },
   "body": {
     "json_class": "Pact::SomethingLike",
     "contents": {
-      "id": "1",
-      "firstName": "Alice",
-      "lastName": "Doe"
+      "id": "100",
+      "firstName": "River Island",
+      "lastName": "UK"
     }
   }
 }
-I, [2023-02-20T15:44:38.857706 #9695]  INFO -- : Verifying - interactions matched
-I, [2023-02-20T15:44:38.858301 #9695]  INFO -- : Cleared interactions
-I, [2023-02-20T15:44:38.859306 #9695]  INFO -- : Writing pact for provaider_ebanii to /mnt/c/Users/den/api-server/transPact/pkg/client/pacts/klient_ebanii-provaider_ebanii.json
+I, [2023-02-21T16:23:49.559388 #27559]  INFO -- : Verifying - interactions matched
+I, [2023-02-21T16:23:49.559968 #27559]  INFO -- : Cleared interactions

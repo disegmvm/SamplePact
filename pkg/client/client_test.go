@@ -3,6 +3,7 @@ package client
 import (
 	"errors"
 	"fmt"
+	"github.com/pact-foundation/pact-go/types"
 	"log"
 	"testing"
 	"transPact/pkg/server"
@@ -11,52 +12,51 @@ import (
 )
 
 func TestClientPact_Local(t *testing.T) {
-	log.Println("OOOOOOOOOOOOOOOOOOOOOOOO nachalo OOOOOOOOOOOOOOOOOOOO")
+	log.Println("[debug] test start")
 
-	// инициализация PACT DSL
 	pact := dsl.Pact{
-		Consumer: "klient_ebanii",
-		Provider: "provaider_ebanii",
+		Consumer: "Client",
+		Provider: "Provider",
 	}
 
-	// установка PACT Mock Server
 	pact.Setup(true)
 
+	// Validate that there is a user with such ID
 	t.Run("get user by id", func(t *testing.T) {
-		id := "1"
-
 		pact.
-			AddInteraction().                           // задается PACT-взаимодействие
-			Given("User Alice exists").                 // задается состояние Поставщика
-			UponReceiving("User 'Alice' is requested"). // задается название тест-кейса
-			WithRequest(dsl.Request{                    // задается ожидаемый запрос
+			AddInteraction().
+			Given("User River Island exists").
+			UponReceiving("User 'River Island' is requested").
+			WithRequest(dsl.Request{
 				Method: "GET",
-				Path:   dsl.Term("/users/1", "/users/[0-9]+"), // задается соответствие для конечной точки
+				Path:   dsl.Term("/users/100", "/users/[0-9]+"),
 			}).
-			WillRespondWith(dsl.Response{ // задается минимальный ожидаемый ответ
+			WillRespondWith(dsl.Response{
 				Status: 200,
-				Body: dsl.Like(server.User{ // задается соответствие для тела ответа
-					ID:        id,
-					FirstName: "Alice",
-					LastName:  "Doe",
+				Body: dsl.Like(server.User{
+					ID:        "100",
+					FirstName: "River Island",
+					LastName:  "UK",
 				}),
 			})
 
-		// верификация взаимодействия на стороне клиента
+		// Validate the current test case by running it against a Mock Service.
 		err := pact.Verify(func() error {
-			// задается хост и публикуется PACT Mock Server в качестве актуального сервера
 			host := fmt.Sprintf("%s:%d", pact.Host, pact.Server.Port)
 
-			// выполнение функции
-			user, err := GetUserByID(host, id)
+			user, err := GetUserByID(host, "100")
 			if err != nil {
 				return errors.New("error is not expected")
 			}
 
-			// проверка, что полученный пользователь соответствует ожидаемому
-			if user == nil || user.ID != id {
-				return fmt.Errorf("expected user with ID %s but got %v", id, user)
+			if user == nil || user.ID != "100" {
+				return fmt.Errorf("expected user with ID %s but got %v", "100", user)
 			}
+
+			// Add interaction for below case
+			/*if user == nil || user.FirstName != "River Island" {
+				return fmt.Errorf("expected to have River Island, but got %s", user)
+			}*/
 
 			return err
 		})
@@ -64,15 +64,27 @@ func TestClientPact_Local(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
+
+		// specify PACT publisher
+		publisher := dsl.Publisher{}
+		err = publisher.Publish(types.PublishRequest{
+			PactURLs:        []string{"../client/pacts/Client-Provider.json"},
+			PactBroker:      "https://pen.pactflow.io/",
+			BrokerToken:     "jEQnxw7xWgYRv-3-G7Cx-g",
+			ConsumerVersion: "1.0.0",
+			Tags:            []string{"1.0.0", "latest"},
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
 	})
 
-	// Контракт пишется в файл
-	if err := pact.WritePact(); err != nil {
+	// enable if no PactFlow is used
+	/*if err := pact.WritePact(); err != nil {
 		t.Fatal(err)
-	}
+	}*/
 
-	// остановка PACT Mock Server
 	pact.Teardown()
 
-	log.Println("OOOOOOOOOOOOOOOOOOOOOOOO konec OOOOOOOOOOOOOOOOOOOO")
+	log.Println("[debug] end with no errors")
 }
