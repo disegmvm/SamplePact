@@ -7,7 +7,7 @@ import (
 	"transPact/pkg/server"
 )
 
-func GetUserByID(host string, id string) (*server.User, error) {
+func GetUserByID(host string, id string) (*server.User2, error) {
 	uri := fmt.Sprintf("http://%s/users/%s", host, id)
 	resp, err := http.Get(uri)
 	if err != nil {
@@ -15,7 +15,7 @@ func GetUserByID(host string, id string) (*server.User, error) {
 	}
 	defer resp.Body.Close()
 
-	var user server.User
+	var user server.User2
 	err = json.NewDecoder(resp.Body).Decode(&user)
 	if err != nil {
 		return nil, err

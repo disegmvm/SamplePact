@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -23,7 +22,9 @@ func GetUserByID(ctx *gin.Context) {
 	id := ctx.Param("userId")
 
 	ctx.JSON(http.StatusOK, User2{
-		ID:       id,
-		LastName: fmt.Sprintf("last%s", id),
+		ID:        id,
+		FirstName: "Default first name",
+		LastName:  "Default last name",
+		Title:     "River Island",
 	})
 }

@@ -15,8 +15,8 @@ func TestServerPact_Verification(t *testing.T) {
 	log.Println("[debug] test start")
 
 	pact := dsl.Pact{
-		Consumer: "Client",
-		Provider: "Provider",
+		Consumer: "Client v3",
+		Provider: "Provider v3",
 	}
 
 	log.Println("[debug] start verification")
