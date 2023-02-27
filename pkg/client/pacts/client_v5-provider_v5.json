@@ -1,0 +1,66 @@
+{
+  "consumer": {
+    "name": "Client_v5"
+  },
+  "provider": {
+    "name": "Provider_v5"
+  },
+  "interactions": [
+    {
+      "description": "A request to retrieve RI",
+      "providerState": "RI Exist",
+      "request": {
+        "method": "GET",
+        "path": "/users/1",
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "matchingRules": {
+          "$.path": {
+            "match": "regex",
+            "regex": "\\/users\\/[0-9]+"
+          },
+          "$.headers.Content-Type": {
+            "match": "regex",
+            "regex": "application\\/json"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "firstName": "string",
+          "id": "string",
+          "lastName": "string",
+          "title": "string"
+        },
+        "matchingRules": {
+          "$.headers.Content-Type": {
+            "match": "regex",
+            "regex": "application\\/json"
+          },
+          "$.body.firstName": {
+            "match": "type"
+          },
+          "$.body.id": {
+            "match": "type"
+          },
+          "$.body.lastName": {
+            "match": "type"
+          },
+          "$.body.title": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
