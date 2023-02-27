@@ -1,2 +1,3 @@
 pkg/client/logs
 pkg/server/log
+pact.log

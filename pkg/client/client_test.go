@@ -5,7 +5,6 @@ import (
 	"github.com/pact-foundation/pact-go/dsl"
 	"github.com/pact-foundation/pact-go/types"
 	"net/http"
-	"strings"
 	"testing"
 	"transPact/pkg/server"
 )
@@ -16,23 +15,20 @@ var commonHeaders = dsl.MapMatcher{
 
 func Test_RiExistTest(t *testing.T) {
 
-	type User struct {
-		Name     string `json:"name" pact:"example=billy"`
-		LastName string `json:"lastName" pact:"example=sampson"`
-	}
-
 	// Create Pact connecting to local Daemon
 	pact := &dsl.Pact{
-		Consumer: "Client v3",
-		Provider: "Provider v3",
+		Consumer: "Client_v5",
+		Provider: "Provider_v5",
 		Host:     "localhost",
 	}
+
 	defer pact.Teardown()
 
 	// Pass in test case. This is the component that makes the external HTTP call
 	var test = func() (err error) {
-		u := fmt.Sprintf("http://localhost:%d/users/1", pact.Server.Port)
-		req, err := http.NewRequest("GET", u, strings.NewReader(`{"name":"River Island"}`))
+		url := fmt.Sprintf("http://localhost:%d/users/1", pact.Server.Port)
+		//req, err := http.NewRequest("GET", url, strings.NewReader(`{"name":"River Island"}`))
+		req, err := http.NewRequest("GET", url, nil)
 		if err != nil {
 			return
 		}
@@ -49,25 +45,18 @@ func Test_RiExistTest(t *testing.T) {
 
 	pact.
 		AddInteraction().
-		Given("riExist").
+		Given("RI Exist").
 		UponReceiving("A request to retrieve RI").
 		WithRequest(dsl.Request{
-			Method: "GET",
-			Path:   dsl.Term("/users/1", "/users/[0-9]+"),
-			/*Query: dsl.MapMatcher{
-				"foo": term("bar", "[a-zA-Z]+"),
-			},*/
+			Method:  "GET",
+			Path:    dsl.Term("/users/1", "/users/[0-9]+"),
 			Headers: commonHeaders,
 		}).
 		WillRespondWith(dsl.Response{
 			Status: 200,
-
-			Body: dsl.Match(server.User2{
-				ID:        "1",
-				FirstName: "Default first name",
-				LastName:  "Default last name",
-				Title:     "River Island",
-			}),
+			Body: dsl.Match(
+				server.User2{},
+			),
 			Headers: dsl.MapMatcher{
 				//"X-Api-Correlation-Id": dsl.Like("100"),
 				"Content-Type": dsl.Term("application/json; charset=utf-8", `application\/json`),
@@ -90,7 +79,7 @@ func Test_RiExistTest(t *testing.T) {
 	// specify PACT publisher
 	publisher := dsl.Publisher{}
 	err = publisher.Publish(types.PublishRequest{
-		PactURLs:        []string{"../client/pacts/client_v3-provider_v3.json"},
+		PactURLs:        []string{"../client/pacts/client_v5-provider_v5.json"},
 		PactBroker:      "https://pen.pactflow.io/",
 		BrokerToken:     "jEQnxw7xWgYRv-3-G7Cx-g",
 		ConsumerVersion: "1.0.0",
@@ -99,7 +88,11 @@ func Test_RiExistTest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+}
 
+// LoginResponse is the login response API struct.
+type Response struct {
+	User *server.User2 `json:"user"`
 }
 
 /*func TestExampleConsumerLoginHandler_UserDoesNotExist(t *testing.T) {

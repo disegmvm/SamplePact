@@ -23,8 +23,8 @@ func GetUserByID(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, User2{
 		ID:        id,
-		FirstName: "Default first name",
-		LastName:  "Default last name",
+		FirstName: "doesn't matter yet",
+		LastName:  "doesn't matter yet",
 		Title:     "River Island",
 	})
 }
