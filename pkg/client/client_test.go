@@ -17,16 +17,15 @@ func Test_RiExistTest(t *testing.T) {
 
 	// Create Pact connecting to local Daemon
 	pact := &dsl.Pact{
-		Consumer: "Client_v5",
-		Provider: "Provider_v5",
-		Host:     "localhost",
+		Consumer: "PBB_SQS",
+		Provider: "SKU_Extract_handler",
+		//Host:     "localhost",
 	}
 
 	defer pact.Teardown()
 
-	// Pass in test case. This is the component that makes the external HTTP call
 	var test = func() (err error) {
-		url := fmt.Sprintf("http://localhost:%d/users/1", pact.Server.Port)
+		url := fmt.Sprintf("http://localhost:%d/sample/endpoint/to/get/transformed/sku", pact.Server.Port)
 		//req, err := http.NewRequest("GET", url, strings.NewReader(`{"name":"River Island"}`))
 		req, err := http.NewRequest("GET", url, nil)
 		if err != nil {
@@ -48,14 +47,17 @@ func Test_RiExistTest(t *testing.T) {
 		Given("RI Exist").
 		UponReceiving("A request to retrieve RI").
 		WithRequest(dsl.Request{
-			Method:  "GET",
-			Path:    dsl.Term("/users/1", "/users/[0-9]+"),
+			Method: "GET",
+			//Path:   dsl.Like(server.TransformedSku{}),
+			//Path:    dsl.Term("/sample/endpoint/to/get/transformed/sku", "/users/endpoint/to/get/transformed/sku"),
+			Path:    dsl.Term("/sample/endpoint/to/get/transformed/sku", "/sample\\/endpoint\\/to\\/get\\/transformed\\/sku"),
 			Headers: commonHeaders,
 		}).
 		WillRespondWith(dsl.Response{
 			Status: 200,
 			Body: dsl.Match(
-				server.User2{},
+				//server.User2{},
+				server.TransformedSku{},
 			),
 			Headers: dsl.MapMatcher{
 				//"X-Api-Correlation-Id": dsl.Like("100"),
@@ -79,7 +81,7 @@ func Test_RiExistTest(t *testing.T) {
 	// specify PACT publisher
 	publisher := dsl.Publisher{}
 	err = publisher.Publish(types.PublishRequest{
-		PactURLs:        []string{"../client/pacts/client_v5-provider_v5.json"},
+		PactURLs:        []string{"../client/pacts/PBB_SQS-SKU_Extract_handler.json"},
 		PactBroker:      "https://pen.pactflow.io/",
 		BrokerToken:     "jEQnxw7xWgYRv-3-G7Cx-g",
 		ConsumerVersion: "1.0.0",
